@@ -3,8 +3,8 @@
     namespace Blogg\Core;
 
     use \PDO;
-    use Bookstore\Core\Config;
-    use Bookstore\Utils\Singleton;
+    use Blogg\Core\Config;
+    use Blogg\Utils\Singleton;
 
     class Connection extends Singleton
     {

@@ -14,12 +14,12 @@
       "page": "number"
     }
   },
-  "books": {
-    "controller": "Book",
+  "post": {
+    "controller": "Post",
     "method": "getAll"
   },
-  "book/:id": {
-    "controller": "Book",
+  "post/:id": {
+    "controller": "Post",
     "method": "get",
     "params": {
       "id": "number"

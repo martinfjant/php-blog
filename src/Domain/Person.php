@@ -1,6 +1,6 @@
 <?php
 
-namespace Bookstore\Domain;
+namespace Blogg\Domain;
 
 class Person
 {

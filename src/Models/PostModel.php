@@ -2,34 +2,35 @@
 
 namespace Blogg\Models;
 
-use Blogg\Domain\Book;
+use Blogg\Domain\Post;
 use Blogg\Exceptions\DbException;
 use Blogg\Exceptions\NotFoundException;
 use PDO;
 
-class BookModel extends AbstractModel
+class PostModel extends AbstractModel
 {
-    const CLASSNAME = '\Blogg\Domain\Book';
+    const CLASSNAME = '\Blogg\Domain\Post';
 
-    public function get(int $bookId): Book
+		// Hämtar en post i tabellen post med ID
+    public function get(int $postId): Post
     {
-        $query = 'SELECT * FROM books WHERE id = :id';
+        $query = 'SELECT * FROM posts WHERE id = :id';
         $sth = $this->db->prepare($query);
-        $sth->execute(['id' => $bookId]);
+        $sth->execute(['id' => $postId]);
 
-        $books = $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
+        $posts = $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
         if (empty($books)) {
             throw new NotFoundException();
         }
 
-        return $books[0];
+        return $posts[0];
     }
-
+		//Hämta alla poster paginerat
     public function getAll(int $page, int $pageLength): array
     {
         $start = $pageLength * ($page - 1);
 
-        $query = 'SELECT * FROM books LIMIT :page, :length';
+        $query = 'SELECT * FROM posts LIMIT :page, :length';
         $sth = $this->db->prepare($query);
         $sth->bindParam('page', $start, PDO::PARAM_INT);
         $sth->bindParam('length', $pageLength, PDO::PARAM_INT);
@@ -41,7 +42,7 @@ class BookModel extends AbstractModel
     public function search(string $searchString): array
     {
         $query = <<<SQL
-SELECT * FROM books
+SELECT * FROM posts
 WHERE title LIKE :searchString OR author LIKE :searchString
 SQL;
         $sth = $this->db->prepare($query);
@@ -50,8 +51,8 @@ SQL;
 
         return $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
     }
-
-    public function getByUser(int $userId): array {
+}
+   /* public function getByUser(int $userId): array {
         $query = <<<SQL
 SELECT b.*
 FROM borrowed_books bb LEFT JOIN books b ON bb.book_id = b.id
@@ -122,5 +123,5 @@ SQL;
         if (!$sth->execute()) {
             throw new DbException($sth->errorInfo()[2]);
         }
-    }
-}
+    }*/
+

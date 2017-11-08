@@ -2,16 +2,16 @@
 
 namespace Blogg\Models;
 
-use Blogg\Domain\Customer;
-use Blogg\Domain\Customer\CustomerFactory;
+use Blogg\Domain\User;
+use Blogg\Domain\User\UserFactory;
 use Blogg\Exceptions\NotFoundException;
 use PDO;
 
-class CustomerModel extends AbstractModel
+class UserModel extends AbstractModel
 {
-    const CLASSNAME = '\Blogg\Domain\Customer\CustomerFactory';
+    const CLASSNAME = '\Blogg\Domain\User\UserFactory';
 
-    public function get(int $customerId): Customer
+    public function get(int $customerId): User
     {
         $query = 'SELECT * FROM customers WHERE id = :id';
         $sth = $this->db->prepare($query);
@@ -21,12 +21,12 @@ class CustomerModel extends AbstractModel
         if (empty($row)) {
             throw new NotFoundException();
         }
-        
-        return CustomerFactory::factory(
-            $row['type'],
+        //Ändra detta i enlighet med databasen
+        return UserFactory::factory(
             $row['id'],
-            $row['firstname'],
-            $row['surname'],
+            $row['username'],
+            $row['f_name'],
+            $row['s_name'],
             $row['email']
         );
     }
@@ -43,16 +43,16 @@ class CustomerModel extends AbstractModel
             throw new NotFoundException();
         }
 
-        return CustomerFactory::factory(
-            $row['type'],
-            $row['id'],
-            $row['firstname'],
-            $row['surname'],
-            $row['email']
+        return UserFactory::factory(
+		        $row['id'],
+		        $row['username'],
+		        $row['f_name'],
+		        $row['s_name'],
+		        $row['email']
         );
     }
 
-    public function getByEmail(string $email): Customer
+    public function getByEmail(string $email): User
     {
         $query = 'SELECT * FROM customers WHERE email = :user';
         $sth = $this->db->prepare($query);
@@ -64,12 +64,12 @@ class CustomerModel extends AbstractModel
             throw new NotFoundException();
         }
 
-        return CustomerFactory::factory(
-            $row['type'],
-            $row['id'],
-            $row['firstname'],
-            $row['surname'],
-            $row['email']
+        return UserFactory::factory(
+		        $row['id'],
+		        $row['username'],
+		        $row['f_name'],
+		        $row['s_name'],
+		        $row['email']
         );
     }
 }

@@ -1,4 +1,4 @@
-<?
+<?php
 namespace Blogg\Domain;
 
 class Post {
@@ -6,6 +6,7 @@ class Post {
 	private $date;
 	private $title;
 	private $content;
+	private $author;
 
   public function getId(): int
 	    {
@@ -22,6 +23,10 @@ class Post {
 	  public function getContent(): string
 	    {
 	        return $this->content;
+	    }
+	 public function getAuthor(): string
+	    {
+	        return $this->author;
 	    }
 }
 ?>

@@ -1,11 +1,11 @@
 <?php
 
-namespace Bookstore\Controllers;
+namespace Blogg\Controllers;
 
-use Bookstore\Exceptions\DbException;
-use Bookstore\Exceptions\NotFoundException;
-use Bookstore\Models\BookModel;
-use Bookstore\Models\CustomerModel;
+use Blogg\Exceptions\DbException;
+use Blogg\Exceptions\NotFoundException;
+use Blogg\Models\BookModel;
+use Blogg\Models\CustomerModel;
 
 class BookController extends AbstractController
 {

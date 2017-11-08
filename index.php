@@ -1,34 +1,22 @@
-<pre>
 <?php
-$host = '127.0.0.1';
-$db   = 'blogg';
-$user = 'root';
-$pass = 'root';
-$charset = 'utf8mb4';
+    use Blogg\Core\Router;
+    use Blogg\Core\Request;
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-$opt = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
-$pdo = new PDO($dsn, $user, $pass, $opt);
-$sql = "select * from users;";
-$sth = $pdo->prepare($sql);
-$sth->execute();
-$res = $sth->fetchAll();
+    function autoloader($classname)
+    {
+        $lastSlash = strpos($classname, '\\') + 1;
+        $classname = substr($classname, $lastSlash);
+        $directory = str_replace('\\', '/', $classname);
+        $filename = __DIR__ . '/src/' . $directory . '.php';
+        require_once($filename);
+    }
 
-$user = $res[0];
+    spl_autoload_register('autoloader');
 
-/*print_r($user);
-var_dump($user);
-$pass = "admin";
-$hash = password_hash($pass, PASSWORD_DEFAULT);*/
-
-if (password_verify("admin", $user['password'])) {
-    echo 'Password is valid!';
-} else {
-    echo 'Invalid password.';
-}
-?>
-</pre>
+    $router = new Router();
+    $response = $router->route(new Request());
+    
+    include_once("templates/header.html");
+    include_once("templates/navigation.html");
+        echo $response;
+    include_once("templates/footer.html");

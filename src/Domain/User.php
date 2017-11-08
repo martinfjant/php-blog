@@ -2,7 +2,7 @@
 
 namespace Blogg\Domain;
 
-interface Customer {
+interface User {
     public function getMonthlyFee();
     public function getAmountToBorrow();
     public function getType();

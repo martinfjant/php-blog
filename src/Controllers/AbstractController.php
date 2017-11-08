@@ -8,18 +8,18 @@ abstract class AbstractController
 {
     protected $request;
     protected $view;
-    protected $customerId;
+    //protected $customerId;
 
     public function __construct(Request $request)
     {
         $this->request = $request;
     }
 
-    public function setCustomerId(int $customerId)
+    /*public function setCustomerId(int $customerId)
     {
         $this->customerId = $customerId;
     }
-
+*/
     protected function render(string $template, array $params): string
     {
         extract($params);
