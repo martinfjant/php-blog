@@ -1,9 +1,9 @@
 <?php
 
-namespace Bookstore\Core;
+namespace Blogg\Core;
 
-use Bookstore\Controllers\ErrorController;
-use Bookstore\Controllers\CustomerController;
+use Blogg\Controllers\ErrorController;
+use Blogg\Controllers\CustomerController;
 
 class Router {
     private $routeMap;
@@ -47,7 +47,7 @@ class Router {
         array $info,
         Request $request
     ): string {
-        $controllerName = '\Bookstore\Controllers\\' . $info['controller'] . 'Controller';
+        $controllerName = '\Blogg\Controllers\\' . $info['controller'] . 'Controller';
         $controller = new $controllerName($request);
 
         if (isset($info['login']) && $info['login']) {

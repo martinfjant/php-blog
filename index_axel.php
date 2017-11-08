@@ -1,6 +1,6 @@
 <?php
-    use Bookstore\Core\Router;
-    use Bookstore\Core\Request;
+    use Blogg\Core\Router;
+    use Blogg\Core\Request;
 
     function autoloader($classname)
     {

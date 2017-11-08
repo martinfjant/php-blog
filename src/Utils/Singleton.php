@@ -1,5 +1,5 @@
 <?php
-    namespace Bookstore\Utils;
+    namespace Blogg\Utils;
 
     abstract class Singleton
     {

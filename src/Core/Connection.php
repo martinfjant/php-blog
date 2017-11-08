@@ -1,6 +1,6 @@
 <?php
 
-    namespace Bookstore\Core;
+    namespace Blogg\Core;
 
     use \PDO;
     use Bookstore\Core\Config;

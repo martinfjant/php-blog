@@ -1,6 +1,6 @@
 <?php
 
-namespace Bookstore\Core;
+namespace Blogg\Core;
 
 class Request {
     const GET = 'GET';

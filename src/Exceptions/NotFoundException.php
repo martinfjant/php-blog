@@ -1,5 +1,5 @@
 <?php
-    namespace Bookstore\Exceptions;
+    namespace Blogg\Exceptions;
 
     use Exception;
 
