@@ -3,18 +3,34 @@
     "controller": "Default",
     "method": "start"
   },
+  "write": {
+  "controller": "Post",
+  "method": "writePost"
+  },
   "login": {
   	"controller": "Customer",
   	"method": "login"
   },
-  "books/:page": {
-    "controller": "Book",
+  "posts": {
+    "controller": "Post",
+    "method": "getAll"
+  },
+  "posts/": {
+    "controller": "Post",
+    "method": "getAll"
+  },
+  "posts/:page": {
+    "controller": "Post",
     "method": "getAllWithPage",
     "params": {
       "page": "number"
     }
   },
   "post": {
+    "controller": "Post",
+    "method": "getAll"
+  },
+  "post/": {
     "controller": "Post",
     "method": "getAll"
   },
@@ -53,8 +69,7 @@
     "controller": "Customer",
     "method": "get",
     "params": {
-      "id": "number"
-    }
+      "id": "number"}
   },
   "my-books": {
     "controller": "Book",

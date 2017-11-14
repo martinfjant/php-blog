@@ -19,7 +19,8 @@ class PostModel extends AbstractModel
         $sth->execute(['id' => $postId]);
 
         $posts = $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
-        if (empty($books)) {
+
+        if (empty($posts)) {
             throw new NotFoundException();
         }
 
@@ -51,8 +52,8 @@ SQL;
 
         return $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
     }
-}
-   /* public function getByUser(int $userId): array {
+
+    public function getByUser(int $userId): array {
         $query = <<<SQL
 SELECT b.*
 FROM borrowed_books bb LEFT JOIN books b ON bb.book_id = b.id
@@ -123,5 +124,6 @@ SQL;
         if (!$sth->execute()) {
             throw new DbException($sth->errorInfo()[2]);
         }
-    }*/
+    }
 
+}

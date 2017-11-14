@@ -17,7 +17,6 @@ class PostController extends AbstractController
         $postModel = new PostModel();
 
         $posts = $postModel->getAll($page, self::PAGE_LENGTH);
-
         $properties = [
             'posts' => $posts,
             'currentPage' => $page,
@@ -27,7 +26,7 @@ class PostController extends AbstractController
         return $this->render('views/posts.php', $properties);
     }
 
-    public function getAll(): string
+    public function getAll(): string //why dis?
     {
         return $this->getAllWithPage(1);
     }
@@ -35,7 +34,6 @@ class PostController extends AbstractController
     public function get(int $postId): string
     {
         $postModel = new PostModel();
-
         try {
             $post = $postModel->get($postId);
         } catch (\Exception $e) {
@@ -63,7 +61,7 @@ class PostController extends AbstractController
         return $this->render('views/posts.php', $properties);
     }
 
-    public function getByUser(): string
+   /* public function getByUser(): string
     {
         $postModel = new PostModel();
         $userModel = new CustomerModel();
@@ -80,8 +78,15 @@ class PostController extends AbstractController
             'lastPage' => true,
             'isMyPosts' => true
         ];
-        
+
         return $this->render('views/my-posts.php', $properties);
     }
-
+*/
+    public function writePost(): string
+    {
+      $properties = [
+          'title' => 'This is the title of the blog'
+      ];
+      return $this->render('views/make-post.php', $properties);
+    }
 }

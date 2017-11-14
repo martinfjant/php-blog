@@ -1,43 +1,37 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-    <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="/">Blogg</a>
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-                <a href="/books" class="nav-link">Böcker</a>
-            </li>
-            <li class="nav-item">
-                <a href="/customers" class="nav-link">Kunder</a>
-            </li>
-        </ul>
-        <form action="/login" method="post">
-            <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-                <li class="dropdown order-1">
-                    <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Logga in
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right mt-1">
-                        <li class="p-3">
-                            <form class="form" role="form">
-                                <div class="form-group">
-                                    <input type="email" name="email" id="inputEmail" class="form-control form-control-sm" placeholder="Email adress" required autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block btn-sm">Logga in</button>
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </form>
+<div style="font-size: 5em; text-align: center">
+      <i class="fa fa-pagelines" aria-hidden="true"></i>
+      <br>
+      <br>
+      <br>
     </div>
-</nav>
-
-<section class="container-fluid flex-grow">
+  </section>
+    <section class="column is-hidden-tablet-only">
+    &nbsp;
+  </section>
+        </main>
+        <footer class="fixed">
+      	<nav class="navbar is-dark">
+    <div class="navbar-brand">
+    <span class="navbar-item">
+    <svg style="width:50px;height:50px" viewBox="0 0 24 24">
+    <path fill="white" d="M22,2C22,2 14.36,1.63 8.34,9.88C3.72,16.21 2,22 2,22L3.94,21C5.38,18.5 6.13,17.47 7.54,16C10.07,16.74 12.71,16.65 15,14C13,13.44 11.4,13.57 9.04,13.81C11.69,12 13.5,11.6 16,12L17,10C15.2,9.66 14,9.63 12.22,10.04C14.19,8.65 15.56,7.87 18,8L19.21,6.07C17.65,5.96 16.71,6.13 14.92,6.57C16.53,5.11 18,4.45 20.14,4.32C20.14,4.32 21.19,2.43 22,2Z" />
+    </svg>
+    </span>
+    <button class="button navbar-burger" data-target="mainMenu">
+    <span></span>
+    <span></span>
+    <span></span>
+    </button>
+    </div>
+    <div class="navbar-menu" id="mainMenu">
+      <div class="navbar-start">
+        <a class="navbar-item">Hem</a>
+        <a class="navbar-item">Om</a>
+        <a class="navbar-item">Arkiv</a>
+      </div>
+      <div class="navbar-end">
+        <a class="navbar-item"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Admin</a>
+      </div>
+    </div>
+    </nav>
+        </footer>
