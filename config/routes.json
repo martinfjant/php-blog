@@ -41,6 +41,13 @@
       "id": "number"
     }
   },
+  "edit/:id": {
+    "controller": "Post",
+    "method": "edit",
+    "params": {
+      "id": "number"
+    }
+  },
   "book/:id/borrow": {
     "controller": "Book",
     "method": "borrow",

@@ -89,4 +89,17 @@ class PostController extends AbstractController
       ];
       return $this->render('views/make-post.php', $properties);
     }
+    public function edit(int $postId): string
+    {
+        $postModel = new PostModel();
+        try {
+            $post = $postModel->get($postId);
+        } catch (\Exception $e) {
+            $properties = ['errorMessage' => 'Post not found!'];
+            return $this->render('views/error.php', $properties);
+        }
+
+        $properties = ['post' => $post];
+        return $this->render('views/edit-post.php', $properties);
+    }
 }
