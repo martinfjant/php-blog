@@ -8,7 +8,7 @@
   "method": "writePost"
   },
   "login": {
-  	"controller": "Customer",
+  	"controller": "User",
   	"method": "login"
   },
   "posts": {

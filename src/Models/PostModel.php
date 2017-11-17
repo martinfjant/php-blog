@@ -14,7 +14,13 @@ class PostModel extends AbstractModel
 		// Hämtar en post i tabellen post med ID
     public function get(int $postId): Post
     {
-        $query = 'SELECT * FROM posts WHERE id = :id';
+        $query = <<<SQL
+        SELECT *
+        FROM posts, author, users
+        WHERE posts.id = author.id
+        AND author.user_id = users.user_id
+        AND posts.id = :id
+SQL;
         $sth = $this->db->prepare($query);
         $sth->execute(['id' => $postId]);
 
@@ -31,7 +37,13 @@ class PostModel extends AbstractModel
     {
         $start = $pageLength * ($page - 1);
 
-        $query = 'SELECT * FROM posts LIMIT :page, :length';
+        $query = <<<SQL
+        SELECT *
+        FROM posts, author, users
+        WHERE posts.id = author.id
+        AND author.user_id = users.user_id
+        LIMIT :page, :length
+SQL;
         $sth = $this->db->prepare($query);
         $sth->bindParam('page', $start, PDO::PARAM_INT);
         $sth->bindParam('length', $pageLength, PDO::PARAM_INT);

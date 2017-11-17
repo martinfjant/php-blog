@@ -6,7 +6,10 @@ class Post {
 	private $date;
 	private $title;
 	private $content;
-	private $author;
+	private $f_name;
+	private $s_name;
+	private $user_id;
+
 
   public function getId(): int
 	    {
@@ -24,9 +27,13 @@ class Post {
 	    {
 	        return $this->content;
 	    }
-	 public function getAuthor(): string
-	    {
-	        return $this->author;
-	    }
+		public function getAuthor(): string
+				{
+						return $this->f_name . ' ' . $this->s_name;
+				}
+		public function getUserId(): string
+			    {
+			        return $this->user_id;
+			    }
 }
 ?>

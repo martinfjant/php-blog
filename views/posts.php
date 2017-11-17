@@ -1,10 +1,3 @@
-<!-- <?php/*
-    echo '<pre>';
-        print_r($this->request->getPath());
-    echo '</pre>';
-    echo '<pre>';
-        print_r($params);
-    echo '</pre>';*/?> -->
 <article class="content is-medium">
 <?php foreach ($posts as $post): ?>
 <div>
@@ -14,12 +7,15 @@
 			</a>
 		</h2>
 <p class="subtitle is-5 has-text-grey-lighter">
-	Av: <i><?php echo $post->getAuthor() ?> </i>
+	Av: <a href="/user/<?php echo $post->getUserId() ?>"><?php echo $post->getAuthor() ?>
+           </a>
 	<?php echo $post->getDate() ?>
+<span style="float: right">
 	<span class="tag">Tagg</span>
 	<span class="tag">Tagg</span>
 	<span class="tag">Tagg</span>
 	<span class="tag">Tagg</span>
+</span>
 </p>
 
 	</div>

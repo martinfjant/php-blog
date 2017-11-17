@@ -9,29 +9,45 @@
     &nbsp;
   </section>
         </main>
-        <footer class="fixed">
-      	<nav class="navbar is-dark">
-    <div class="navbar-brand">
-    <span class="navbar-item">
-    <svg style="width:50px;height:50px" viewBox="0 0 24 24">
-    <path fill="white" d="M22,2C22,2 14.36,1.63 8.34,9.88C3.72,16.21 2,22 2,22L3.94,21C5.38,18.5 6.13,17.47 7.54,16C10.07,16.74 12.71,16.65 15,14C13,13.44 11.4,13.57 9.04,13.81C11.69,12 13.5,11.6 16,12L17,10C15.2,9.66 14,9.63 12.22,10.04C14.19,8.65 15.56,7.87 18,8L19.21,6.07C17.65,5.96 16.71,6.13 14.92,6.57C16.53,5.11 18,4.45 20.14,4.32C20.14,4.32 21.19,2.43 22,2Z" />
-    </svg>
-    </span>
-    <button class="button navbar-burger" style="margin-top: 0.5em; margin-right: 0.5em; margin-bottom: 0.5em;" data-target="mainMenu">
-    <span></span>
-    <span></span>
-    <span></span>
-    </button>
-    </div>
-    <div class="navbar-menu" id="mainMenu">
-      <div class="navbar-start">
-        <a class="navbar-item">Hem</a>
-        <a class="navbar-item">Om</a>
-        <a class="navbar-item">Arkiv</a>
-      </div>
-      <div class="navbar-end">
-        <a class="navbar-item"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Admin</a>
-      </div>
-    </div>
+<footer>
+    <nav class="navbar is-dark is-fixed-bottom">
+        <div class="navbar-brand">
+            <span class="navbar-item">
+                <svg style="width:50px;height:50px" viewBox="0 0 24 24">
+                    <path fill="white" d="M22,2C22,2 14.36,1.63 8.34,9.88C3.72,16.21 2,22 2,22L3.94,21C5.38,18.5 6.13,17.47 7.54,16C10.07,16.74 12.71,16.65 15,14C13,13.44 11.4,13.57 9.04,13.81C11.69,12 13.5,11.6 16,12L17,10C15.2,9.66 14,9.63 12.22,10.04C14.19,8.65 15.56,7.87 18,8L19.21,6.07C17.65,5.96 16.71,6.13 14.92,6.57C16.53,5.11 18,4.45 20.14,4.32C20.14,4.32 21.19,2.43 22,2Z" />
+                </svg>
+            </span>
+            <button class="button navbar-burger" style="margin-top: 0.5em; margin-right: 0.5em; margin-bottom: 0.5em;" data-target="mainMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="navbar-menu" id="mainMenu">
+          <div class="navbar-start">
+          <a class="navbar-item">Hem</a>
+          <a class="navbar-item">Om</a>
+          <a class="navbar-item">Arkiv</a>
+          </div>
+          <div class="navbar-end">
+            <div class="navbar-item has-dropdown has-dropdown-up is-hoverable">
+                <a class="navbar-link"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logga&nbsp;in&nbsp;&nbsp;&nbsp;</a>
+              <div class="navbar-dropdown">
+                <form action="/login" method="post">
+                  <div class="navbar-item">
+                  <input type="text" placeholder="Användarnamn" name="username" class="input is-small">
+                  </div>
+                  <div class="navbar-item">
+                  <input type="password" name="password"  class="input is-small">
+                  </div>
+                  <hr class="navbar-divider">
+                  <div class="navbar-item">
+                    <button type="submit" class="button is-small is-centered">Logga in</button>
+                  </div>
+                </form>
+              </div>
+        </div>
+        </div>
+        </div>
     </nav>
-        </footer>
+</footer>
