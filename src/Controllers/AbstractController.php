@@ -33,9 +33,9 @@ abstract class AbstractController
 
     protected function redirect(string $url)
     {
-        ob_start();
+      //  ob_start();
         header('Location: '.$url);
-        ob_end_flush();
-        die();
+      //  ob_end_flush();
+      //  die();
     }
 }

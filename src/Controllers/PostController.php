@@ -61,27 +61,14 @@ class PostController extends AbstractController
         return $this->render('views/posts.php', $properties);
     }
 
-   /* public function getByUser(): string
+    public function getByUser(int $user_id): string
     {
         $postModel = new PostModel();
-        $userModel = new CustomerModel();
-
-        $user = $userModel->get($this->Id);
-       $posts = $postModel->getByUser($this->customerId);
-        /$returnedPosts = $postModel->getReturnedByUser($this->customerId);
-
-        $properties = [
-            'customer' => $customer,
-            'posts' => $posts,
-            'returnedPosts' => $returnedPosts,
-            'currentPage' => 1,
-            'lastPage' => true,
-            'isMyPosts' => true
-        ];
-
-        return $this->render('views/my-posts.php', $properties);
+        $properties = $postModel->getByUserId($user_id);
+        $data = ['posts' => $properties];
+        return $this->render('views/my-posts.php', $data);
     }
-*/
+
     public function writePost(): string
     {
       $properties = [

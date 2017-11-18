@@ -65,7 +65,7 @@ SQL;
         return $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
     }
 
-    public function getByUser(int $userId): array {
+  /*  public function getByUser(int $userId): array {
         $query = <<<SQL
 SELECT b.*
 FROM borrowed_books bb LEFT JOIN books b ON bb.book_id = b.id
@@ -76,7 +76,7 @@ SQL;
         $sth->execute(['id' => $userId]);
 
         return $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
-    }
+    }*/
 
     public function getReturnedByUser(int $userId): array {
         $query = <<<SQL
@@ -137,5 +137,41 @@ SQL;
             throw new DbException($sth->errorInfo()[2]);
         }
     }
+    public function getByUserId(string $user_id)//: Array
+    {
+        $query = <<<SQL
+        SELECT *
+        FROM posts, author, users
+        WHERE posts.id = author.id
+        AND author.user_id = users.user_id
+        AND users.user_id = :user_id
+SQL;
+        $sth = $this->db->prepare($query);
+        $sth->execute(['user_id' => $user_id]);
 
+        $posts = $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
+
+      return $posts;
+    }
+
+    public function get_onlygorlookingg(int $postId): Post
+    {
+        $query = <<<SQL
+        SELECT *
+        FROM posts, author, users
+        WHERE posts.id = author.id
+        AND author.user_id = users.user_id
+        AND posts.id = :id
+SQL;
+        $sth = $this->db->prepare($query);
+        $sth->execute(['id' => $postId]);
+
+        $posts = $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
+
+        if (empty($posts)) {
+            throw new NotFoundException();
+        }
+
+        return $posts[0];
+    }
 }

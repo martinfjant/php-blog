@@ -80,7 +80,14 @@
   },
   "my-books": {
     "controller": "Book",
-    "method": "getByUser",
+    "method": "getByUserName",
     "login": true
+  },
+  "user/:id": {
+    "controller": "Post",
+    "method": "getByUser",
+    "params": {
+      "id": "number"
+    }
   }
 }

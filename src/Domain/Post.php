@@ -9,6 +9,8 @@ class Post {
 	private $f_name;
 	private $s_name;
 	private $user_id;
+	private $username;
+	private $email;
 
 
   public function getId(): int
@@ -34,6 +36,14 @@ class Post {
 		public function getUserId(): string
 			    {
 			        return $this->user_id;
+			    }
+		public function getUserName(): string
+			    {
+			        return $this->username;
+			    }
+		public function getEmail(): string
+			    {
+			        return $this->email;
 			    }
 }
 ?>
