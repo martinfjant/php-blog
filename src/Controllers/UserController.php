@@ -17,18 +17,17 @@ class UserController extends AbstractController
           $inputPassword = $params->getString('password');
           $UserModel = new UserModel();
           $User = $UserModel->getUser($inputUsername);
-          $User = $User[0];
-          print_r($User);
-          echo $User["password"];
-          echo "</pre>";
+          $User = $User[0]; //User kommer som en array i en array
           if (password_verify($inputPassword, $User["password"])){
             //Tack Alve för hjälp med Sessions <3<3
+            session_start();
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $User['username'];
+            $_SESSION['time'] = time();
             echo $_SESSION['username'];
             //return $this->render('views/my_posts.php', $params);
             // REDIRECT SKICKAR VIDARE TILL EN PATH (URL).
-            $this->redirect("posts/user/" . $User['username']);
+            $this->redirect("user/" . $User['user_id']);
           }
           else {
             $params = ['errorMessage' => 'Fel användarnamn eller lösenord'];
@@ -37,8 +36,11 @@ class UserController extends AbstractController
           }
         }
         public function logout() {
+          session_start();
           $_SESSION = [];
+          unset($_SESSION["newsession"]);
 	        session_destroy();
+          $this->redirect("/");
         }
 //$this->render('views/login.php');
 
@@ -103,3 +105,4 @@ class UserController extends AbstractController
         $properties = ['User' => $User];
         return $this->render('views/User.php', $properties);
     }*/
+?>

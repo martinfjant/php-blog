@@ -1,3 +1,5 @@
+<?php  session_start();
+$_SESSION['time'] = time();?>
 <div style="font-size: 5em; text-align: center">
       <i class="fa fa-pagelines" aria-hidden="true"></i>
       <br>
@@ -30,6 +32,24 @@
           <a class="navbar-item">Arkiv</a>
           </div>
           <div class="navbar-end">
+            <?php if (isset($_SESSION['loggedin'])) : ?>
+            <?php if ($_SESSION['loggedin']==true) : ?>
+            <div class="navbar-item has-dropdown has-dropdown-up is-hoverable">
+                <a class="navbar-link"><i class="fa fa-unlock" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<?php echo $_SESSION['username']; ?>&nbsp;&nbsp;&nbsp;</a>
+              <div class="navbar-dropdown">
+                <form action="/login" method="post">
+                  <div class="navbar-item">
+                    Inloggad som:<br>
+                  <?php echo $_SESSION['username'];?>
+                  </div>
+                  <hr class="navbar-divider">
+                  <div class="navbar-item">
+                    <a href="/logout" class="button is-small is-centered">Logga ut</a>
+                  </div>
+                </form>
+              </div>
+            <?php endif ?>
+          <?php else: ?>
             <div class="navbar-item has-dropdown has-dropdown-up is-hoverable">
                 <a class="navbar-link"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logga&nbsp;in&nbsp;&nbsp;&nbsp;</a>
               <div class="navbar-dropdown">
@@ -46,8 +66,9 @@
                   </div>
                 </form>
               </div>
+        <?php endif ?>
         </div>
         </div>
         </div>
     </nav>
-</footer>
+</footer><?php ?>

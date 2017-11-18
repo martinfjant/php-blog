@@ -11,6 +11,10 @@
   	"controller": "User",
   	"method": "login"
   },
+  "logout": {
+    "controller": "User",
+    "method": "logout"
+  },
   "posts": {
     "controller": "Post",
     "method": "getAll"
