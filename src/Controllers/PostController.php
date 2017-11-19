@@ -85,8 +85,13 @@ class PostController extends AbstractController
             $properties = ['errorMessage' => 'Post not found!'];
             return $this->render('views/error.php', $properties);
         }
-
-        $properties = ['post' => $post];
-        return $this->render('views/edit-post.php', $properties);
+        if ($_SESSION['loggedin'==true]){
+          $properties = ['post' => $post];
+          return $this->render('views/edit-post.php', $properties);
+      }
+      else {
+        $properties = ['errorMessage' => 'Du måste vara inloggad för att visa denna sida'];
+        return $this->render('views/error.php', $properties);
+      }
     }
 }

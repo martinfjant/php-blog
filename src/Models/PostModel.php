@@ -174,4 +174,15 @@ SQL;
 
         return $posts[0];
     }
+    public function createPost() {
+      //Hämta data med post genom FilteredMap
+
+      //Strukturera den för queryn
+
+      //Skapa SQL-queryn i heredoc
+
+      //Kör den med PDO
+
+      //Returna något.. men vad? Skicka till det skrivna inlägget
+    }
 }
