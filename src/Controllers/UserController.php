@@ -8,43 +8,40 @@ use Blogg\Models\UserModel;
 
 class UserController extends AbstractController
 {
-      public function login() {
-        echo "<pre>";
-        //  print_r($this->request->getParams());
-          $params = $this->request->getParams();
-          $inputUsername = $params->getString('username');
-          var_dump($inputUsername);
-          $inputPassword = $params->getString('password');
-          $UserModel = new UserModel();
-          $User = $UserModel->getUser($inputUsername);
-          $User = $User[0]; //User kommer som en array i en array
-          if (password_verify($inputPassword, $User["password"])){
-            //Tack Alve för hjälp med Sessions <3<3
-            session_start();
-            $_SESSION['loggedin'] = true;
-            $_SESSION['username'] = $User['username'];
-            $_SESSION['time'] = time();
-            echo $_SESSION['username'];
-            //return $this->render('views/my_posts.php', $params);
-            // REDIRECT SKICKAR VIDARE TILL EN PATH (URL).
-            $this->redirect("user/" . $User['user_id']);
-          }
-          else {
-            $params = ['errorMessage' => 'Fel användarnamn eller lösenord'];
-          //  return $this->render('views/layout.php', $params);
-          $this->render('views/layout.php', $params);
-          }
-        }
-        public function logout() {
-          session_start();
-          $_SESSION = [];
-          unset($_SESSION["newsession"]);
-	        session_destroy();
-          $this->redirect("/");
-        }
-//$this->render('views/login.php');
+    public function login()
+    {
+        $params = $this->request->getParams();
+        $inputUsername = $params->getString('username');
+        $inputPassword = $params->getString('password');
 
-      }
+        $userModel = new UserModel();
+
+        $user = $userModel->getUser($inputUsername, $inputPassword);
+
+        if ($user) {
+            //Tack Alve för hjälp med Sessions <3<3
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $user->getUsername();
+            $_SESSION['time'] = time();
+
+            // REDIRECT SKICKAR VIDARE TILL EN PATH (URL).
+            return $this->redirect("user/" . $user->getId());
+        } else {
+            $params = ['errorMessage' => 'Fel användarnamn eller lösenord'];
+            return $this->render('views/layout.php', $params);
+        }
+    }
+
+    public function logout()
+    {
+        session_start();
+        $_SESSION = [];
+        unset($_SESSION["newsession"]);
+        session_destroy();
+        $this->redirect("/");
+    }
+    //$this->render('views/login.php');
+}
 /*    public function login(): string {
       // Om requesten inte kommer med POST kasta felmeddelanden
         if (!$this->request->isPost()) {
@@ -105,4 +102,3 @@ class UserController extends AbstractController
         $properties = ['User' => $User];
         return $this->render('views/User.php', $properties);
     }*/
-?>

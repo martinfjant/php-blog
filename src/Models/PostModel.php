@@ -65,18 +65,17 @@ SQL;
         return $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
     }
 
-  /*  public function getByUser(int $userId): array {
+    public function getByUser(int $userId): array {
         $query = <<<SQL
-SELECT b.*
-FROM borrowed_books bb LEFT JOIN books b ON bb.book_id = b.id
-WHERE bb.customer_id = :id
-AND bb.end IS NULL
+            SELECT *
+            FROM posts, author, users
+            WHERE author.user_id = :id
 SQL;
         $sth = $this->db->prepare($query);
         $sth->execute(['id' => $userId]);
 
         return $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
-    }*/
+    }
 
     public function getReturnedByUser(int $userId): array {
         $query = <<<SQL

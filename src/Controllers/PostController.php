@@ -64,34 +64,42 @@ class PostController extends AbstractController
     public function getByUser(int $user_id): string
     {
         $postModel = new PostModel();
-        $properties = $postModel->getByUserId($user_id);
-        $data = ['posts' => $properties];
-        return $this->render('views/my-posts.php', $data);
+        $posts = $postModel->getByUserId($user_id);
+
+        $properties = ['posts' => $posts];
+
+        return $this->render('views/my-posts.php', $properties);
     }
 
     public function writePost(): string
     {
-      $properties = [
+        $properties = [
           'title' => 'This is the title of the blog'
       ];
-      return $this->render('views/make-post.php', $properties);
+        return $this->render('views/make-post.php', $properties);
     }
     public function edit(int $postId): string
     {
         $postModel = new PostModel();
+
         try {
             $post = $postModel->get($postId);
         } catch (\Exception $e) {
             $properties = ['errorMessage' => 'Post not found!'];
             return $this->render('views/error.php', $properties);
         }
-        if ($_SESSION['loggedin'==true]){
-          $properties = ['post' => $post];
-          return $this->render('views/edit-post.php', $properties);
-      }
-      else {
-        $properties = ['errorMessage' => 'Du måste vara inloggad för att visa denna sida'];
-        return $this->render('views/error.php', $properties);
-      }
+
+        if ($_SESSION['loggedin'] == true) {
+            $properties = ['post' => $post];
+            return $this->render('views/edit-post.php', $properties);
+        } else {
+            $properties = ['errorMessage' => 'Du måste vara inloggad för att visa denna sida'];
+            return $this->render('views/error.php', $properties);
+        }
+    }
+
+    public function create()
+    {
+        return $this->render('views/make-post.php');
     }
 }

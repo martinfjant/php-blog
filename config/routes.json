@@ -4,22 +4,18 @@
     "method": "start"
   },
   "write": {
-  "controller": "Post",
-  "method": "writePost"
+    "controller": "Post",
+    "method": "writePost"
   },
   "login": {
-  	"controller": "User",
-  	"method": "login"
+    "controller": "User",
+    "method": "login"
   },
   "logout": {
     "controller": "User",
     "method": "logout"
   },
   "posts": {
-    "controller": "Post",
-    "method": "getAll"
-  },
-  "posts/": {
     "controller": "Post",
     "method": "getAll"
   },
@@ -34,10 +30,6 @@
     "controller": "Post",
     "method": "getAll"
   },
-  "post/": {
-    "controller": "Post",
-    "method": "getAll"
-  },
   "post/:id": {
     "controller": "Post",
     "method": "get",
@@ -45,47 +37,12 @@
       "id": "number"
     }
   },
-  "edit/:id": {
+  "post/:id/edit": {
     "controller": "Post",
     "method": "edit",
     "params": {
       "id": "number"
     }
-  },
-  "book/:id/borrow": {
-    "controller": "Book",
-    "method": "borrow",
-      "login": true,
-      "params": {
-      "id": "number"
-    }
-  },
-  "book/:id/return": {
-    "controller": "Book",
-    "method": "returnBook",
-      "login": true,
-      "params": {
-      "id": "number"
-    }
-  },
-  "books/search": {
-    "controller": "Book",
-    "method": "search"
-  },
-  "customers": {
-    "controller": "Customer",
-    "method": "getAll"
-  },
-  "customer/:id": {
-    "controller": "Customer",
-    "method": "get",
-    "params": {
-      "id": "number"}
-  },
-  "my-books": {
-    "controller": "Book",
-    "method": "getByUserName",
-    "login": true
   },
   "user/:id": {
     "controller": "Post",
@@ -93,5 +50,9 @@
     "params": {
       "id": "number"
     }
+  },
+  "user/post/create": {
+    "controller": "Post",
+    "method": "create"
   }
 }

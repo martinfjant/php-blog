@@ -19,8 +19,9 @@ abstract class AbstractController
     {
         $this->customerId = $customerId;
     }
-*/
-    protected function render(string $template, array $params): string
+    */
+
+    protected function render(string $template, array $params = []): string
     {
         extract($params);
 
