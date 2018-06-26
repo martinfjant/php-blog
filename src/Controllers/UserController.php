@@ -22,6 +22,7 @@ class UserController extends AbstractController
             //Tack Alve för hjälp med Sessions <3<3
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $user->getUsername();
+            $_SESSION['user_id'] = $user->getId();
             $_SESSION['time'] = time();
 
             // REDIRECT SKICKAR VIDARE TILL EN PATH (URL).

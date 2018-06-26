@@ -27,19 +27,19 @@ SQL;
         $user = $sth->fetch();
 
         // TODO: Create registration and actually hash the passwords, then use this if-else block
-        /*
+        
         if (password_verify($password, $user->password)) {
             return $user;
         } else {
             return null;
         }
-        */
+        
 
-        if ($password == $user->password) {
+        /*if ($password == $user->password) {
             return $user;
         } else {
             return null;
-        }
+        }*/
     }
 
 

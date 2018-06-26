@@ -102,4 +102,16 @@ class PostController extends AbstractController
     {
         return $this->render('views/make-post.php');
     }
+
+    public function  createPost($user_id)
+    {
+        $post = new PostModel();
+        $params = $this->request->getParams();
+            echo "<pre>";
+            var_dump($params);
+            echo "</pre>";
+            $post->createPost($user_id, $params);
+
+        return $this->redirect('/user/' + $_SESSION['user_id']);
+    }
 }

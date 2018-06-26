@@ -20,10 +20,10 @@ $res = $sth->fetchAll();
 
 $user = $res[0];
 
-/*print_r($user);
+print_r($user);
 var_dump($user);
 $pass = "admin";
-$hash = password_hash($pass, PASSWORD_DEFAULT);*/
+$hash = password_hash($pass, PASSWORD_DEFAULT);
 
 if (password_verify("admin", $user['password'])) {
     echo 'Password is valid!';

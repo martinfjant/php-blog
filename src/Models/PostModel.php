@@ -7,11 +7,10 @@ use Blogg\Exceptions\DbException;
 use Blogg\Exceptions\NotFoundException;
 use PDO;
 
-class PostModel extends AbstractModel
-{
+class PostModel extends AbstractModel {
     const CLASSNAME = '\Blogg\Domain\Post';
 
-		// Hämtar en post i tabellen post med ID
+	// Hämtar en post i tabellen post med ID
     public function get(int $postId): Post
     {
         $query = <<<SQL
@@ -153,35 +152,25 @@ SQL;
       return $posts;
     }
 
-    public function get_onlygorlookingg(int $postId): Post
-    {
-        $query = <<<SQL
-        SELECT *
-        FROM posts, author, users
-        WHERE posts.id = author.id
-        AND author.user_id = users.user_id
-        AND posts.id = :id
+    public function createPost(int $user_id, $params) { 
+        var_dump($params);
+        $inputTitle = $params->getString('title');
+        $inputContent = $params->getString('content');
+          $query = <<<SQL
+          START TRANSACTION
+          INSERT INTO posts (title, content)
+          VALUES (:title, :content)
+          INSERT INTO author (id, user_id)
+          VALUES (LAST_INSERT_ID(), :user_id)
+          COMMIT
 SQL;
-        $sth = $this->db->prepare($query);
-        $sth->execute(['id' => $postId]);
+          $sth = $this->db->prepare($query);
+          $sth->bindValue('title', $inputTitle);
+          $sth->bindValue('content', $inputContent);
+          $sth->bindValue('user_id', $user_id);
+          $sth->execute();
 
-        $posts = $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
-
-        if (empty($posts)) {
-            throw new NotFoundException();
         }
-
-        return $posts[0];
     }
-    public function createPost() {
-      //Hämta data med post genom FilteredMap
 
-      //Strukturera den för queryn
-
-      //Skapa SQL-queryn i heredoc
-
-      //Kör den med PDO
-
-      //Returna något.. men vad? Skicka till det skrivna inlägget
-    }
-}
+    /*  */

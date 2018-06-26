@@ -54,5 +54,12 @@
   "user/post/create": {
     "controller": "Post",
     "method": "create"
+  },
+  "createPost/:id": {
+    "controller": "Post",
+    "method": "createPost",
+    "params":{
+      "id": "number"
+    }
   }
 }

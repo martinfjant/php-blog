@@ -1,6 +1,7 @@
 <article class="content">
       <h1>Skriv inlägg</h1>
-      <form action="/createPost" method="post">
+      <?php var_dump($_SESSION['user_id']); ?>
+      <form action="/createPost/<?php echo $_SESSION['user_id']; ?>" method="post">
 <div class="field">
   <div class="control has-icons-left has-icons-right">
     <input class="input is-large" type="text" placeholder="Rubrik" name="rubrik">
