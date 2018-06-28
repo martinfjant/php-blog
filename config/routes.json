@@ -55,11 +55,16 @@
     "controller": "Post",
     "method": "create"
   },
-  "createPost/:id": {
+  "createPost": {
     "controller": "Post",
-    "method": "createPost",
-    "params":{
-      "id": "number"
-    }
+    "method": "createPost"
+  },
+  "editPost" : {
+    "controller": "Post",
+    "method": "editPost"
+  },
+  "deletePost": {
+    "controller": "Post",
+    "method": "deletePost"
   }
 }

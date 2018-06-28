@@ -152,25 +152,59 @@ SQL;
       return $posts;
     }
 
-    public function createPost(int $user_id, $params) { 
-        var_dump($params);
-        $inputTitle = $params->getString('title');
-        $inputContent = $params->getString('content');
-          $query = <<<SQL
-          START TRANSACTION
-          INSERT INTO posts (title, content)
-          VALUES (:title, :content)
-          INSERT INTO author (id, user_id)
-          VALUES (LAST_INSERT_ID(), :user_id)
-          COMMIT
+    public function  createPost($user_id, $params) { 
+
+       $inputTitle = $params->getString('rubrik');
+       $inputContent = $params->getString('text');
+
+       $query = <<<SQL
+       INSERT INTO posts (title, content)
+       VALUES (:title, :content)
 SQL;
-          $sth = $this->db->prepare($query);
-          $sth->bindValue('title', $inputTitle);
-          $sth->bindValue('content', $inputContent);
-          $sth->bindValue('user_id', $user_id);
-          $sth->execute();
+       $sth = $this->db->prepare($query);
+       $sth->execute(['title' => $inputTitle, 'content' => $inputContent]);
+       $lastId = $this->db->lastInsertId();
+       $query = <<<SQL
+           INSERT INTO author (id, user_id)
+           VALUES (LAST_INSERT_ID(), :user_id)
+SQL;
+       $sth = $this->db->prepare($query);
+       $sth->execute(['user_id' => $user_id]);
+
+       return $lastId;
+
 
         }
-    }
 
-    /*  */
+    public function  editPost($params) { 
+        $postId = $params->getString('id');
+        $inputTitle = $params->getString('rubrik');
+        $inputContent = $params->getString('text');
+
+        
+        $query = <<<SQL
+        UPDATE posts 
+        SET title = :title, content = :content
+        WHERE id = :id;
+SQL;
+        $sth = $this->db->prepare($query);
+        $sth->execute(['title' => $inputTitle, 'content' => $inputContent, 'id' => $postId]);
+
+    
+        return $postId;
+    
+    
+      }
+
+      public function deletePost($params) {
+      $postId = $params->getString('id');
+
+      $query = <<<SQL
+      DELETE FROM posts
+      WHERE id = :id;
+SQL;
+      $sth = $this->db->prepare($query);
+      $sth->execute(['id' => $postId]);
+      }
+
+}

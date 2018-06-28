@@ -78,7 +78,7 @@ class PostController extends AbstractController
       ];
         return $this->render('views/make-post.php', $properties);
     }
-    public function edit(int $postId): string
+    public function  edit(int $postId): string
     {
         $postModel = new PostModel();
 
@@ -98,20 +98,35 @@ class PostController extends AbstractController
         }
     }
 
-    public function create()
+    public function  create()
     {
         return $this->render('views/make-post.php');
     }
+   
+    public function  createPost()
+    {
+        $user_id = $_SESSION['user_id'];    
+        $post = new PostModel();
+        $params = $this->request->getParams();
+        $new_post = $post->createPost($user_id, $params);
 
-    public function  createPost($user_id)
+        return $this->redirect("/post/$new_post");
+    }
+    public function   editPost()
     {
         $post = new PostModel();
         $params = $this->request->getParams();
-            echo "<pre>";
-            var_dump($params);
-            echo "</pre>";
-            $post->createPost($user_id, $params);
+        $updpost = $post->editPost($params);
 
-        return $this->redirect('/user/' + $_SESSION['user_id']);
+        return $this->redirect("/post/$updpost");
     }
+
+    public function  deletePost() {
+        $user_id = $_SESSION['user_id'];
+        $params = $this->request->getParams();
+        $post = new PostModel();
+        $post->deletePost($params);
+        return $this->redirect("/user/$user_id");
+    }
+
 }
