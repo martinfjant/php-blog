@@ -46,10 +46,14 @@ SQL;
         $start = $pageLength * ($page - 1);
 
         $query = <<<SQL
-        SELECT *
-        FROM posts, author, users
-        WHERE posts.id = author.id
-        AND author.user_id = users.user_id
+        SELECT posts. id, posts.title, cathegory.cat_id, cathegory.cat_name,
+        posts.date,  users.user_id, users.username,
+        CONCAT(users.f_name, " ", users.s_name) AS author, users.email 
+        FROM posts
+        LEFT JOIN author ON posts.id = author.id
+        LEFT JOIN users ON users.user_id = author.user_id
+        LEFT JOIN cat_bind ON cat_bind.id = posts.id
+        LEFT JOIN cathegory ON cathegory.cat_id = cat_bind.cat_id
         LIMIT :page, :length
 SQL;
         $sth = $this->db->prepare($query);
@@ -60,6 +64,15 @@ SQL;
         return $sth->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
     }
 
+    public function getPostCount() {
+        $query = <<<SQL
+        SELECT COUNT(id)
+        FROM posts
+SQL;
+        $sth = $this->db->prepare($query);
+        $sth->execute();
+        return $sth->fetchColumn();
+    }
 
     public function getByUser(int $userId): array {
         $query = <<<SQL

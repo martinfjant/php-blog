@@ -9,7 +9,7 @@ use Blogg\Models\UserModel;
 
 class PostController extends AbstractController
 {
-    const PAGE_LENGTH = 10;
+    const PAGE_LENGTH = 5;
 
     public function getAllWithPage($page): string
     {
@@ -17,10 +17,12 @@ class PostController extends AbstractController
         $postModel = new PostModel();
 
         $posts = $postModel->getAll($page, self::PAGE_LENGTH);
+        $postCount = $postModel->getPostCount();
         $properties = [
             'posts' => $posts,
             'currentPage' => $page,
-            'lastPage' => count($posts) < self::PAGE_LENGTH
+            'lastPage' => count($posts) < self::PAGE_LENGTH,
+            'lastPageNum' => intdiv($postCount, self::PAGE_LENGTH)
         ];
 
         return $this->render('views/posts.php', $properties);
