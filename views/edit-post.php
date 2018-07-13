@@ -18,6 +18,16 @@
     </span>
   </div>
 </div>
+<h3 class="">Kategori</h3>
+  <label> Personligt:
+  <input type="radio" value="1" name="cat" <?php if ($post->getCatId() == 1):?>checked<?php endif?> >
+  </label>
+  <label>
+    Opersonligt:  
+  <input type="radio" value="2" name="cat" <?php if ($post->getCatId() == 2):?>checked<?php endif?> >
+  </label>
+<h3>Taggar</h3>
+  <div id="taginput" class="input tagarea"></div>
   <div class="field is-grouped is-grouped-right">
   <p class="control">
     <button class="button is-primary" type="submit">
@@ -37,7 +47,21 @@
       Ta bort
   </button>
   </p>
+  <!-- <?php
+        //  foreach ($post->getTags() as $key => $value)
+        //  echo "<a href='/posts/tag/$key' class='tag is-dark'>$value</a>"
+         ?> -->
+         </div>
   </form>
-</div>
-      
+</div>    
 </article>
+<script type="text/javascript">
+        var taggle = new Taggle('taginput', {
+            placeholder: 'Type your favorite type of juice... (hint: orange)',
+            allowDuplicates: true,
+            tags: [<?php
+            foreach ($post->getTags() as $value)
+            echo "'$value'"
+         ?>]
+        });
+</script>

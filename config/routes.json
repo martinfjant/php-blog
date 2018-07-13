@@ -66,5 +66,17 @@
   "deletePost": {
     "controller": "Post",
     "method": "deletePost"
+  },
+  "tags" : {
+    "controller": "Tag",
+    "method": "getAll"
+  },
+  "tags/delete/:id" : {
+    "controller": "Tag",
+    "method": "deleteTag",
+    "params": {
+      "id": "number"
+    }
   }
+
 }

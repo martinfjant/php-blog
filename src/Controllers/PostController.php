@@ -61,7 +61,7 @@ class PostController extends AbstractController
         return $this->render('views/posts.php', $properties);
     }
 
-    public function getByUser(int $user_id): string
+    public function getByUser(int $user_id)//: string
     {
         $postModel = new PostModel();
         $posts = $postModel->getByUserId($user_id);
@@ -100,33 +100,53 @@ class PostController extends AbstractController
 
     public function  create()
     {
+        if ($_SESSION['loggedin'] == true){
         return $this->render('views/make-post.php');
+        } else {
+            $properties = ['errorMessage' => 'Du måste vara inloggad för att visa denna sida'];
+        return $this->render('views/error.php', $properties);
+        }
     }
    
     public function  createPost()
     {
-        $user_id = $_SESSION['user_id'];    
-        $post = new PostModel();
-        $params = $this->request->getParams();
-        $new_post = $post->createPost($user_id, $params);
+        if ($_SESSION['loggedin'] == true){
+            $user_id = $_SESSION['user_id'];    
+            $post = new PostModel();
+            $params = $this->request->getParams();
+            $new_post = $post->createPost($user_id, $params);
 
         return $this->redirect("/post/$new_post");
+        } else {
+            $properties = ['errorMessage' => 'Du måste vara inloggad för att visa denna sida'];
+        return $this->render('views/error.php', $properties);
+        }
     }
     public function   editPost()
     {
-        $post = new PostModel();
-        $params = $this->request->getParams();
-        $updpost = $post->editPost($params);
+        if ($_SESSION['loggedin'] == true){
+            $post = new PostModel();
+            $params = $this->request->getParams();
+            $updpost = $post->editPost($params);
 
         return $this->redirect("/post/$updpost");
+        } else {
+            $properties = ['errorMessage' => 'Du måste vara inloggad för att visa denna sida'];
+        return $this->render('views/error.php', $properties);
+        }
     }
 
     public function  deletePost() {
-        $user_id = $_SESSION['user_id'];
-        $params = $this->request->getParams();
-        $post = new PostModel();
-        $post->deletePost($params);
+        if ($_SESSION['loggedin'] == true){
+            $user_id = $_SESSION['user_id'];
+            $params = $this->request->getParams();
+            $post = new PostModel();
+            $post->deletePost($params);
         return $this->redirect("/user/$user_id");
+        } else {
+            $properties = ['errorMessage' => 'Du måste vara inloggad för att visa denna sida'];
+        return $this->render('views/error.php', $properties);
+        }
     }
 
 }

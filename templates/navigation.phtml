@@ -26,16 +26,32 @@
     </div>
     <div class="navbar-menu" id="mainMenu">
       <div class="navbar-start">
-        <a class="navbar-item">Hem</a>
+        <a class="navbar-item"
+           href="/">
+           Hem
+        </a>
         <a class="navbar-item">Om</a>
         <a class="navbar-item">Arkiv</a>
+        <?php if ($_SESSION['loggedin'] == true): ?>
+        <a class="navbar-item"
+           href="/user/<?php echo $_SESSION['user_id'];?>">
+           Mina inlägg
+        </a>
+        <a class="navbar-item"
+           href="/user/post/create">
+           Skriv nytt
+        </a>
+        <a class="navbar-item"
+           href="/tags">
+           Hantera taggar
+        </a>
+        <?php endif?>
       </div>
       <div class="navbar-end">
 
 
         <?php if (isset($_SESSION['loggedin'])) : ?>
                 <?php if ($_SESSION['loggedin']==true) : ?>
-                <button>test2</button>
                 <div class="navbar-item has-dropdown has-dropdown-up is-hoverable">
                   <a class="navbar-link">
                     <i class="fa fa-unlock" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
